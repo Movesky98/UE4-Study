@@ -1,0 +1,107 @@
+클라이언트 - 서버 모델
+
+- 클라이언트 서버 모델의 본질과
+- 언리얼이 왜 이 모델을 사용하는지
+- 언리얼에서 서버를 시작하고 클라이언트로 연결하는 방법을 배워보자
+
+
+# 멀티플레이가 되는 것 과 멀티플레이를 하는 것
+1. 가장 중요한 것은 Input 과 State
+ - State : 월드의 모든 것, 위치, 속도 등 우리가 보는 모든 것에 영향을 미칠 수 있는 것
+       	상태는 엔진에 의해 화면에 표시되는 이미지로 렌더링 됨
+	액터의 변형, 컴포넌트의 다양한 변수 등 
+ - Input : 상태에 Input을 이용해 몇가지 동작을 입력함 (버튼, 조이스틱 등)
+
+
+언리얼은 Tick 동안 현재 상태를 현재 입력 & 작업과 결합하고
+두번째 상태인 [다음 상태]와 결과를 결합함
+그리고 이 상태가 렌더링 되어 사용자에게 표시됨
+
+# Peer-to-Peer
+ - 일명  P2P
+ - 이건 나중에 강의를 따로 보고 정리해보자
+ - 직접 그려야 할듯
+
+# Client-Server를 언리얼에서 어떻게 구현할 것인가?
+ - 우선 명령프롬포트를 열어야한다.
+ - 커맨드 라인에서 구현해보기 위해
+ - 클라이언트나 서버로 게임을 시작하거나
+ - 서버 -> 클라이언트로 변경이 가능해진다.
+
+내 로컬 IP 확인하는 방법
+- 명령 프롬프트에서 ipconfig 입력
+
+다른사람에게 zip 파일 또는 프로젝트 파일을 전달하는 사이트
+- www.ShareDrop.io
+
+■ 명령 프롬포트에서 게임 시작하는 방법
+
+우선 해야할 것은 언리얼 실행 파일을 찾아야한다.
+내 컴퓨터 내에 존재하는 언리얼 실행파일의 경로는 다음과 같다.
+C:\Users\user0128\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe
+
+이후 명령 프롬포트에 다음과 같은 명령어를 입력한다.
+"C:\Users\user0128\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe" "프로젝트 경로" "E:\UE4 Tutorial\Udemy\Puzzle_Platforms\PuzzlePlatforms\PuzzlePlatforms.uproject"
+
+최종 결과물은 다음과 같다.
+"C:\Users\user0128\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe" "E:\UE4 Tutorial\Udemy\Puzzle_Platforms\PuzzlePlatforms\PuzzlePlatforms.uproject"
+
+이후 게임을 시작하기 위해선 끝에 -game을 붙여줘야한다.
+"C:\Users\user0128\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe" "E:\UE4 Tutorial\Udemy\Puzzle_Platforms\PuzzlePlatforms\PuzzlePlatforms.uproject" -game
+
+이 기능은 어디에서 쓰이는가?
+ - 에디터를 지속적으로 다운시키는 버그가 있을때, 그 버그가 무엇인지 알고싶다면
+   이 방법을 이용해 에디터를 다운되지 않은 채, 게임을 실행할 수 있다.
+
+# -game 뒤에 -log를 붙여 게임에서 더 많은 정보를 얻을 수 있다.
+ - C++ 내에서 사용중인 로그, 로그온 등 모두에 대한 전체 로그를 얻을 수 있다.
+
+# 프로젝트에 여러 맵이 존재하는 경우 특정 맵을 전달할 수 있다.
+ - 특정 유형의 URL을 사용
+ - 명령프롬포트에서 게임을 실행할 때 ["UE4 에디터 경로" "uproject 파일 경로" -game]
+ - ["UE4 에디터 경로" "uproject 파일 경로" /Game/ThirdPersonCPP/Maps/ThirdPersonExampleMap -game]
+
+ -> 경로상 Content와 맵의 확장자 umap은 포함시키지 않아도 된다.
+
+# 또, 맵 대신 IP 주소를 입력할 수 있는 옵션도 있다.
+ - 이를 이용해 서버에 접속할 수 있다.
+ - 데디케이티드 서버를 이용하여 서버에 접속 가능!
+
+
+▶ Connect Your Mini-Network, 나만의 전용서버 (데디케이티드 서버) 연결하는 절차
+ - Find Your IP Address, 우선 IP 주소를 찾음
+ - Launch Server, 서버를 실행한다 (어떻게?)
+   ▸ 앞서 했던 -game 대신 -server를 넣어보자
+ - Launch some Clients, 몇개의 Client를 실행해본다. (어떻게?) 
+   ▸ 맵 대신 IP 주소를 넣을 수 있다 하였다.
+   ▸ 그래서 그거 어떻게 하는건데.
+   ▸ 대신에 
+   ▸ 220.125.179.61 IP 주소를 넣으면 된다.
+ - Ensure they are connected to the server, 다 함께 플레이 할 수 있도록 확인해보십쇼
+
+▣ 했는데 안됬다. 보니까 4.17.2 버전 이상으로 되었을 경우, 
+    [Map 경로?listen]와 같이 ?listen을 추가하라고 하였다.
+  -> UE4 4.26.2 버전은 그리 만만하지 않았다. 여전히 안된다.
+  -> 서버가 언리얼의 기본값이 아닌 다른 포트에서 수신 대기를 하고 있어서 그렇다고 한다
+  -> 따라서 서버를 시작하고 언리얼이 시작되는 포트를 찾는 방법과
+  -> 클라이언트를 해당 포트에 구체적으로 연결하는 방법을 Araboza
+
+# 비상! 서버에 대한 개념이 매우 부족한 듯 하다!
+ - 포트는 애플리케이션이 어디에 있는지 식별하는 방법
+ - 한 시스템의 특정 포트에서 수신하도록 선택할 수 있다.
+ - 즉, 시스템에서 실행되어 네트워크 트래픽을 수락하는
+ - 애플리케이션이 두 개 이상 있을 수 있다.
+ - ip 주소는 컴퓨터만 지정하고 애플리케이션은 지정하지 않기 때문
+
+# 서버의 IP 주소 찾기
+ - 명령프롬포트에서 서버를 실행한 후 Control + F -> listening을 찾음
+ - LogNet: GameNetDriver IpNetDriver_0 IpNetDriver listening on port 7777
+ - 보면 '7777' 에서 수신 대기한다고 적혀있음
+ - 검색을 통해, 실제 Windows에서 서버 차단을 해제하기 위해 서버가 일시중지되었기에
+ - Control + C 를 통해 서버 차단을 해제해주어야 한다.
+ - 이후 클라이언트에서 접속할 때, 220.125.179.61:7777 과 같이 만들어주면 된다.
+
+▣ 이래도 안되서 진짜 큰일난 줄 알았는데 공유기를 사용하는 경우, 
+    공유기를 기준으로 열리는 증상이 있다고 한다. 확인해보자. (2시간 뒤에 시발)
+
+# 추가적으로 클라이언트에서 서버에 입장할 때, 127.0.0.1을 사용해도 된다.

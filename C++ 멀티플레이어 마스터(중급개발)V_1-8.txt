@@ -1,0 +1,23 @@
+10. FVector 프로퍼티용 위젯
+
+# 무빙 플랫폼 설정 방법
+ - FVector에도 UPROPERTY를 이용하여 다양한 기능을 쓸 수 있는 듯
+ - 영상을 보고 따라하다 보면, 큐브에 설정된 TargetLocation을 따라가지 않고
+ - 다른 곳으로 이동하는 것을 볼 수 있는데
+ - 이는 TargetLocation은 로컬 공간에 있지만, 
+   계산된 경로 (Direction)의 위치는 글로벌 공간이기 때문이다.
+
+
+# Global Location으로 어떻게 변환하는가
+ - GetTransform().TransformPosition(TargetLocation);
+
+# 위치 (Position) 벡터와 방향 (Direction) 벡터의 차이점
+ 1. 위치 벡터
+   - Scale -> Rotation -> Transform을 적용하는 방식
+
+ 2. 방향 벡터
+   - Scale -> Rotation을 적용하는 방식
+
+ - 이 두개의 차이점은 위치 A, B 그리고 방향 벡터 A' 가 있다고 했을 때,
+   A, B의 위치가 바뀌어도 방향 벡터 A'가 바뀌지 않도록 하거나
+   A'가 조정되어야하는 차이점이 있다.

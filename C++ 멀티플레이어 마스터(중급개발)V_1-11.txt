@@ -1,0 +1,22 @@
+15. C++로 오버랩 이벤트 처리하기
+
+# Overlap 이벤트를 처리하는 방법을 배워보자
+- BeginOverlap
+- EndOverlap
+
+# UFUNCTION은 왜 쓰는 것일까
+- 동적 이벤트이기 때문에 사용해야 한다.
+
+이번 파트에서는 "컴포넌트"의 충돌을 감지하도록하는  OnOverlapBegin()과 OnOverlapEnd()에 대해 배운다.
+
+정확하게는 "컴포넌트"의 충돌을 cpp에서 구현하는 방법인 듯 하다.
+
+헤더파일에서 void OnOverlapBein(), void OnOverlapEnd()를 구현한 후
+BeginPlay()에서 
+Component변수->OnComponentBeginOverlap.AddDynamic(UserObject, FuncName)
+* UserObject : 함수를 호출하려는 객체
+* FuncName : 해당 함수의 주소 (예 : &OnOverlapBegin)
+
+
+정확한 문서정보는 이곳에 있음
+https://docs.unrealengine.com/4.27/ko/ProgrammingAndScripting/ClassCreation/CodeOnly/

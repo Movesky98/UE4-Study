@@ -1,0 +1,28 @@
+9. 권한 및 복제
+
+- Replication & Authority에 대해 알아보는 시간이구요~
+
+# 위의 두 개념은 우리가 서버에서 객체를 움직일 때,
+   그 객체가 클라이언트에서 어떻게 움직이는 지에 대한 모든것을 알려준다.
+   또, 클라이언트에선 무슨 일이 일어나는지, 어떻게 다른 프로퍼티(예: 색상)로 
+   확장하는지를 알려준다.
+
+# Authority를 가진 액터가 무엇인지 이해해보자
+ - 언리얼 멀티플레이어 리플리케이션의 핵심 개념쓰
+ - 이건 강의에서 나온 내용을 보고 정리해야 할 것 같음
+
+# 특정 큐브를 서버에서만 업데이트 되도록 만들고
+   변경 사항을 모든 클라이언트에 적용시키는 법
+ - void BeginPlay()를 생성해 주어야 함
+ - cpp 파일에 생성된 BeginPlay()에 Super::BeginPlay(); 추가
+ - Super::BeginPlay()를 추가하지 않으면 blueprint가 호출되지 않음
+ - 이후, SetReplicates(true); 추가
+ - Replicate를 할 때, Movement라던가 어떤 요소를 복제할 지 설정이 필요한 듯.
+   (SetReplicateMovement와 같은 함수가 존재함)
+ 
+
+# BeginPlay()에서 HasAuthority가 없을 경우, 
+   클라이언트 / 서버 모두 호출하므로 SetReplicates(true)에서 오류가 발생함
+ - 클라이언트에서 SetReplicates()를 호출하는 것은 그리 의미 없음
+ - 클라이언트는 권한이 없기 때문
+

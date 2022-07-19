@@ -1,0 +1,28 @@
+14. 플랫폼 트리거 설정하기
+
+# 작은 Gizmo인 압력 발판 (Pressure Pad)와 관련한 내용을 Araboza
+- 우리는 플랫폼을 활성화하는 압력 패드 같은 것의 기초를 만들 것임
+
+무엇을 사용하나?
+- TriggerVolume
+- Pressure Pad
+- Static Mesh
+
+c++과 블루프린트를 이용해 만들어보자
+
+# CreateDefaultSubobject
+- CPP 내에 컴포넌트를 생성하는 방법
+
+
+# UPROPERTY
+- 프로퍼티 지정자를 붙일 때, 
+  UPROPERTY(EditAnywhere)
+  class UBoxComponent* TriggerVolume
+  을 하게 될 경우 망가진 위젯을 얻게 된다.
+
+- 이유는 UBoxComponent "포인터"를 편집하려 하였기 때문임.
+- 따라서 포인터가 가리키는 내용물을 변경하고 싶다면
+- 직관적이지 않은 VisibleAnywhere을 사용하는 것이 적절하다.
+
+# 두 개의 FVector의 거리를 알아내는 법
+- (B - A).Size()
