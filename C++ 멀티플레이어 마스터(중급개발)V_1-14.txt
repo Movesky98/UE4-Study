@@ -1,0 +1,44 @@
+19. ServerTravel로 서버 호스팅하기
+
+# 로비를 만들고 서버를 호스팅하여 클라이언트가 입장할 수 있도록 만들어보기
+- 참가(Join)과 호스팅(Hosting) 없이 레벨에 곧바로 스폰되지 않도록 한다.
+- 따라서, 플레이어가 잠시 스폰될 로비를 만들 것임.
+- 이후, 콘솔을 이용해 서버를 호스팅하거나 가입할 수 있도록 만든다.
+
+# 호스트를 통해 맵을 이동해야 한다. 어떻게 이동할까?
+- 맵이 있어야 한다.
+- PlayerController이 맵에 연결되어야 한다.
+- ServerTravel을 통해, 서버가 Client들에게 새로운 맵으로 이동할 수 있도록 방법을 알려줌.
+- 이러면 Client들은 단지 새 맵으로 이동하게 되며, 네트워크는 연결되어 있는 상태로
+- 각 Client에 맵이 로드되고 새 맵에서 시작할 수 있게 된다.
+- 따라서, 우리는 ServerTravel을 해볼 것임
+
+
+# ServerTravel
+- ServerTravel() 함수를 이용한다.
+- 우리가 있는 UWorld의 함수임.
+- GetWorld()->ServerTravel("맵의 URL"); 을 통해서 맵을 넘어갈 수 있음
+
+# 그렇다면 ServerTravel을 이용해 서버를 호스팅 하는 방법은 무엇일까
+- ServerTravel() 함수는 URL을 통해 실현된다.
+- '호스트'를 지정하는 매개변수가 없음
+- 이 '호스트 지정'은 URL의 일부로 수행됨.
+- "맵 URL?listen"과 같은 방식으로 매개변수를 전달해주면, Listen서버의 방식으로 작동될 수 있음.
+
+# 참고로 ServerTravel()만 사용하여 리슨서버를 운영할 경우, 오류가 발생함.
+- 실제로 ?listen을 추가하지 않고 실행할 경우, 함께 연결되지 않음.
+
+
+# 명령어
+- 서버의 경우
+  : & "C:\Users\user0128\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe" "E:\UE4 Tutorial\Udemy\Puzzle_Platforms\PuzzlePlatforms\PuzzlePlatforms.uproject" /Game/Maps/Lobby -game -log
+
+
+- 클라이언트의 경우
+  : & "C:\Users\user0128\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe" "E:\UE4 Tutorial\Udemy\Puzzle_Platforms\PuzzlePlatforms\PuzzlePlatforms.uproject" 192.168.0.102 -game -log
+
+% 참고로 Windows PowerShell을 이용해서 해보도록 하자. Command Prompt는 상대적으로 구지다 카더라 %
+
+
+# 참고 사이트
+https://docs.unrealengine.com/4.26/ko/InteractiveExperiences/Networking/Travelling/

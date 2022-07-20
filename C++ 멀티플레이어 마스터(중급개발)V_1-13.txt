@@ -5,3 +5,27 @@
 - 치트처럼 사용할 수 있음
 
 # 매개변수로 'join' 콘솔 명령을 이용해 네트워크에 가입할 수 있다.
+
+# GameInstance를 이용해 게임 내에서 콘솔과 상호작용 할 수 있도록 만들 수 있다.
+- 어떻게? 다음과 같은 코드를 작성하면 된다.
+- UFUNCTION(Exec)
+  void 함수이름()
+
+# 그렇다면 UFUNCTION(Exec) 기능은 GameInstance 클래스에서만 가능한가?
+- 아니다. 다른 클래스도 가능하다.
+- PlayerControllers
+- PlayerController에 의해 Possessed된 Pawn도 가능
+- HUDs
+- Cheat Managers
+- Game Modes
+- Game Instances
+
+
+# 간단하게 Unreal 화면에 로깅하는 법을 알아보자
+- UFUNCTION(Exec)의 기능이 추가된 함수에 AddOnScreenDebugMessage()를 이용하면
+  Unreal 화면에 로깅할 수 있다.
+
+- 자세한건 프로젝트를 보고 정리하도록 하자.
+
+# 콘솔에 명령어를 입력할 때 나오는 Argument들은 어떻게 추가하는가?
+- 간단하다. 함수에 매개변수 추가하면 됨
