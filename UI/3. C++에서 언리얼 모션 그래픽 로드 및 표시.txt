@@ -1,0 +1,16 @@
+27. C++에서 UMG Load 및 Display 하기
+
+# 강의 목표
+- C++로 생성 및 로드되는 메뉴가 있는 MainMenu 레벨을 만들 것임
+- 클래스를 사용하여 위젯을 로드, 표시하는 방법을 Araboza
+
+# 로드하는 동안 위젯을 표시하는 방법
+- GameInstance의 Init에서 위젯을 로드하려 할 경우 너무 일찍 시작됨
+- 위젯을 표시할 뷰포트가 생성되기 전 상태임.
+
+- 단순화하기 위해 레벨을 로드하면서 시작해보자.
+
+# 레벨 로드
+- UFUNCTION(Exec) LoadMenu()
+- CreatWidget을 이용해 위젯을 생성하여 UUserWidget* 변수에 담음
+- UUserWidget* 변수->AddToViewport()를 사용하여 위젯을 보일 수 있음
