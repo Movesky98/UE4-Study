@@ -1,0 +1,22 @@
+10. 메뉴 비활성화하기
+
+# 목표
+- 메뉴의 비활성화
+- 적절한 타이밍에 메뉴를 비활성화하여, 메뉴가 마우스와 입력을 제어할 수 없도록 할 것임.
+- 강의에서는 GameInstance에서 Menu 관련 메소드가 실행되는 것이 맘에 안듦
+- 따라서 리팩토링을 진행하도록 한다 하였음.
+
+# UUserWidget::OnLevelRemovedFromWorld
+- 레벨이 기본적으로 종료될 때 호출되는 함수
+
+# FInputMode
+- 게임상에서 UI와 관련된 기능들이 모여있는 곳
+- FInputMode 뒤에 UI, GameOnly 등 여러가지가 올 수 있으니 나중에 확인할 때
+  필요한게 무엇인지 생각하고 붙여넣는 것이 좋을 듯
+
+# 강의상 이상한 점
+- 내가 잘못 생각한 것일수도 있지만 PlayerController->SetInputMode(Mode)를 적용시킬     때, UI 설정은 가능하지만 다른 레벨로 넘어가면서 InputMode가 바뀌지 않는 일이 발생함
+
+- 이는 위에서 보았던 OnLevelRemovedFromWorld 함수를 호출하지 않았기 때문으로 보임
+- 애초에 MainMenu에서 Teardown()를 선언하더라도 그걸 맵을 넘어갈 때 사용하지 
+  않았기 때문

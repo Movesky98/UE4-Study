@@ -1,0 +1,10 @@
+38. 위젯 스위처를 지닌 메뉴
+
+# 목표
+- MenuSwitcher를 이용하여 MainMenu와 JoinMenu를 전환해보자
+
+# WidgetSwitcher
+- 위젯들을 전환시키기 위해 존재하는 컴포넌트
+- 위젯스위처의 디테일창을 보면 Switcher 부분에 Active Widget Index로 전환할 수 있다.
+
+-끝!-
