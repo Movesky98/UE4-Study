@@ -1,0 +1,26 @@
+42. 도전 : 인게임 메뉴 불러오기
+
+# 목표
+- 인게임에서 메뉴를 불러와 MainMenu Level과 InGame Level사이를 
+  자유롭게 돌아다니게 해보자
+
+# 궁금점
+- 강의에서 나오는 모든 UI들은 기초에 있었던 Canvas를 없앤 후 작업을 진행하였다.
+- Canvas는 어떤 역할을 하기에 간단하게 없애도 실행이 되는건지 의문.
+
++ 갑자기 생각난 부분
+ @ 메모리 문제때문에 const를 쓰는 이유가 무엇일까?
+
+# 충격
+- 강의에서는 기존에 존재했던 MainMenu에서의 
+  메소드 Setup, Teardown, SetMenuInterface가 InGameMenu에서도 쓰이므로
+- 따로 MenuWidget.cpp을 생성, 코드를 이동하고 MainMenu, InGameMenu 모두
+  MenuWidget을 상속받도록 하였다.
+- 이런 과정은 아주 배울점이 있어보임. 대학에서 배웠던 내용들을 드디어 볼 수 있게된듯.
+  (이게 맞나..?)
+
+# 문제점 발생
+- 강의 중간에 Widget Blueprint의 부모상속을 해주는 부분을 빼먹었다.
+- 결과적으로 C++에서 Widget을 찾지못하고 nullptr을 반환하였기 때문에
+  InGameLoadMenu() 함수가 그냥 닫히는 문제 발생.
+- 이거 하나때문에 1시간 30분을 빼먹었음;;
