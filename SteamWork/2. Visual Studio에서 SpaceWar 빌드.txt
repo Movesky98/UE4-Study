@@ -1,0 +1,46 @@
+49. Visual Studio에서 SpaceWar 빌드하기
+
+# 목표
+- Steamworks 예제 프로젝트를 실행하는 것이 목표
+
+# Steamworks
+- Steamworks SDK를 다운받았을 때, SteamworksExample이라는 폴더가 있음
+- 거기서 .sln 파일을 실행 후 솔루션 빌드
+- 솔루션 빌드를 하게 되면 d3dx9.h를 찾을 수 없다는 오류 문구가 나옴
+- 이는 DirectX가 없거나, DirectX가 해당 헤더파일의 위치를 못잡아서 그런거라네요
+- 따라서 우리는 DirectX Include file 경로와 DirectX Library File의 경로를 
+  Visual Studio가 알도록 해야함
+
+# 필수
+- 경로를 Visual Studio에 알려주기 전에 DirectX SDK를 다운받아야 한다!
+- 2022.08.04 기준 링크
+  https://www.microsoft.com/ko-KR/download/details.aspx?id=6812
+
+
+# 강의 주의 사항
+프로젝트 네비게이터에서 "Headers" 가상 폴더를 마우스 오른쪽 버튼으로 클릭하고 "Add files to 'steamworksexample'..."을 선택한 다음, 예제 프로젝트의 소스 코드 폴드에서 RemotePlay.h라는 파일을 찾습니다. 그것을 선택하고 "Headers" 가상 폴더에 추가를 확인합니다.
+
+RemotePlay.cpp 파일에 대해 동일한 작업을 반복하되 "Source” 가상 폴더에 있습니다.
+
+# 참고자료
+@ DirectX SDK 경로
+- 인클루드 디렉터리: $(IncludePath);$(DXSDK_DIR)Include
+- 인클루드 라이브러리 디렉터리: $(LibraryPath);$(DXSDK_DIR)Lib\x86
+
+
+-- 순서 --
+프로젝트의 VC++ 디렉터리를 다음과 같이 수정하여 SDK 헤더 및 라이브러리에 적합한 순서를 사용합니다.
+
+i. 프로젝트의 **속성**을 열고 **VC++ 디렉터리** 페이지를 선택합니다. ii. **모든 구성 및 모든 플랫폼**을 선택합니다. iii. 이러한 디렉터리를 다음과 같이 설정합니다.
+실행 가능한 디렉터리: <부모 또는 프로젝트 기본값에서 상속(> 오른쪽 드롭다운)
+포함 디렉터리: $(IncludePath);$(DXSDK_DIR)Include
+라이브러리 디렉터리 포함: $(LibraryPath);$(DXSDK_DIR)Lib\x86
+iv. 적용을 클릭합니다.
+v. x64 플랫폼을 선택합니다.
+vi. 다음과 같이 라이브러리 디렉터리를 설정합니다.
+
+라이브러리 디렉터리: $(LibraryPath);$(DXSDK_DIR)Lib\x64
+
+# 후기
+- 아... 뭐랄까 깊이들어가다보니 머리가 벌써부터 아파온다.
+- 쉽지않을 것 같다. 환경변수 설정에 플랫폼 도구집합 변경에 등... 여러가지가 머리를 썩힌다.

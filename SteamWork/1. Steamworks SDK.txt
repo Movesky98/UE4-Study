@@ -1,0 +1,41 @@
+47. Steamworks SDK 다운받기
+
+# 목표
+- Hamachi와 같은 VPN 없이도 인터넷으로 멀티플레이를 할 수 있도록 구현한다.
+- Steamworks SDK를 이용할 것임.
+
+# 알아볼 것들
+- Steamworks SDK가 우리를 위해 어떤 일을 하는지
+- SDK가 무엇인지
+- Steamworks와 Unreal Online SubSystem이 무엇인지, 어떻게 작동하는지 알아보자
+
+
+# SDK
+- Software Development Kit
+- Steamworks SDK는 SDK를 이용해 클라우드와 대화하고, 게임을 통합하며, VPN 없이
+  멀티플레이 기능을 제공해준다.
+
+# Steamworks SDK
+- 저장소에 넣으면 실제로 암호화되기 때문에 다른 코드처럼 
+  일반적으로 Github에서 다운로드 할 수 없음.
+- 허나 모든 언리얼 프로젝트를 다운로드 할 수 있다. (?)
+
+# Unreal and Steam (Steamworks가 언리얼에 어떻게 적용되는가)
+- 우리는 스팀을 이용해 VPN 없이 멀티플레이어와 같은 기능들을 지원해주는
+  클라우드 서비스를 사용할 수 있음.
+- 또, 우리는 웹 프로토콜을 사용해 서버와 직접 대화하지 않음.
+
+- 다음과 같은 방향으로 소통하게 됨
+  [Unreal Engine + MyGame] -> [Online Sub-System] -> [Steamworks SDK] -> [Steam]
+
+# Online Sub-System
+- Steamworks와 같은 API에 대해 일반화한 것
+- 언리얼의 Online Sub-System을 이용해 서로 교환할 수 있도록 함.
+- 업적, 리더보드, 사용자 프로필같은 것들이 있음.
+
+# Steam SDK를 다운로드하는 이유
+- 실제로 이는 언리얼에 이미 포함되어 있다.
+- 허나, Low Level에서의 Steamworks로 
+  모든 것이 정상적으로 작동되는지 확인할 필요가 있음.
+
+
