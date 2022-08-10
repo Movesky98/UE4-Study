@@ -1,0 +1,31 @@
+53. 온라인 서브 시스템
+
+# 온라인 서브시스템을 통해 PuzzlePlatforms을 임포트한다.
+- 온라인 서브시스템의 기능과 이를 프로젝트의 일부로 포함하는 방법
+- 그 포인터를 확보하는 방법
+
+
+# 온라인 서브시스템은 매우매우 다양함
+- 온라인 서브시스템은 한 덩어리가 아니기 때문에 많은 인터페이스가 있음
+- 모두 선택사항이기 때문에, 필요한 것을 가져다 쓰면 된다.
+
+# 프로젝트에 온라인 서브시스템 모듈을 인클루드 하는 법
+- 프로젝트명.Build.cs 파일을 열어 "OnlineSubsystem" 추가
+- 이로써 새 모듈인 OnlineSubsystem을 포함하게 되고
+  새로운 헤더파일에 액세스 할 수 있다.
+
+# 온라인 서브시스템 인터페이스를 수행하기에 좋은 컴포넌트는 GameInstance
+- 그러면 GameInstance가 UI와 OnlineSubsystem을 수행하게 됨.
+- 일단 두개 확인
+- GameInstance.cpp에서 게임 생성중 상당히 늦게 호출되는 Init() 메서드를 이용
+  이 시점에서 우리가 설정한 OnlineSubsystem을 갖게될 것임.
+
+# 온라인 서브시스템에 대한 포인터를 확보해야함!
+- #include "OnlineSubsystem.h"
+- 언리얼에서 정적 메소드인 Get() 이용
+- UE_LOG를 이용하여 Subsystem의 이름을 볼려하면 아무것도 없다고 나옴
+- 이는 서브시스템을 구성하지 않고 단순히 모듈을 연결했기 때문
+
+
+# 참고자료
+- https://docs.unrealengine.com/5.0/en-US/online-subsystem-in-unreal-engine/#interfaces (온라인 서브시스템 인터페이스)
