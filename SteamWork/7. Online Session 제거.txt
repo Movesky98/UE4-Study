@@ -1,0 +1,35 @@
+56. OnlineSession 제거하기
+
+# 목표
+- 세션이 존재하는지 확인
+- 세션을 파괴하는 방법
+- 비동기식으로 세션을 파괴할 때, 어떤 어려움이 있고 해결방법을 Araboza
+
+# 파괴 이슈
+- 생성과 마찬가지로 파괴도 비동기 작업임.
+- 소멸자가 호출되었을 때, 비동기적인 파괴가 이루어지지 않음
+- "원할 때 파괴하고 끝나면 말해주세요" 하는 격
+- 그러므로 반환될 때 까지 계속 하다가 파괴를 끝내야함.
+
+따라서, 우리는 SessionInterface가 주는 비동기식 파괴를 우리식으로 바꿀 것임
+(예전에 있던 세션이니까 그냥 삭제하세요 식으로)
+
+# 세션이 존재하는지 확인하는 방법
+- IOnlineSession 문서에서 확인 가능
+- GetNameSession(세션이름) 이용
+
+# 세션 파괴하는 함수
+- DestroySession(세션이름)
+
+# 작동방식
+1. GameInstance의 Init()에서 세션이 생성 or 파괴되었을 경우 알려주는 델리게이트를 등록
+   (IOnlineSessionPtr 이용, 이미 SessionInterface가 있어야하는 상태이어야 함.)
+2. Session의 생성, 파괴는 UI에서 이루어지기 때문에 
+   버튼을 눌렀을 경우 실행되는 함수 A() 에서 세션 생성 or 파괴가 실행됨
+3. 따라서, 델리게이트를 통해 세션의 파괴, 생성이 끝난 후 어떤 처리를 하는 것이 필요하다.
+   생성 : IOnlineSessionPtr::OnCreateSessionCompleteDelegates
+   파괴 : IOnlineSessionPtr::OnDestroySessionCompleteDelegates
+
+
+# 필요
+- 델리게이트에 대한 개념을 확실히 잡아놓는 것이 필요함

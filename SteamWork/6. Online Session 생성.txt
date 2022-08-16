@@ -44,3 +44,5 @@ Q. 그렇다면 델리게이트로 돌려받은 세션을 어떻게 처리할까
           Cannot create session 'My Session Game': session already exists.
    와 같은 로그가 뜨면 이는 세션을 생성하고 파괴하지 않았기 때문에 발생하는 로그임.
 
+# 참고문서
+https://docs.unrealengine.com/4.27/ko/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/Delegates/
