@@ -12,4 +12,35 @@
 
 # 매치메이킹 세션
 - IOnlineSession::CreateSession() 함수를 사용하여 세션을 생성할 수 있다.
+- #include "Interfaces/OnlineSessionInterface.h" 포함 필요 (4.26 기준)
 - 세션이 생성되면 델리게이트를 호출함.
+
+# FOnlineSessionSettings
+- IOnlineSession::CreateSession() 함수를 사용할 때 전달해야하는 파라미터
+- #include "OnlineSessionSettings.h"와 같이 헤더 포함 해줘야함
+
+# 델리게이트
+- 앞서 세션이 생성되면 델리게이트를 호출한다고 했음.
+- 세션을 생성하는 것은 실제로 네트워크를 나가는 것이기 때문에 
+  비동기 작업에 대한 이해가 필요
+- 서버로부터 응답을 받기 위한 시간이 걸릴 수 있음
+- 이는 자신의 컴퓨터의 CPU / GPU가 하는 일만큼 빠르지 않음 
+  (서버와의 거리가 있기 때문에)
+- 따라서 우리는 서버가 응답하려하는 동안 게임을 계속할 수 있어야함 (동기성의 등장!)
+
+# 동기 (Asynchronous)
+- CreateSession이 반환되었을 때, 실제로 아직 세션이 만들어지지 않은 상태임.
+- 실제로 세션은 생성중이며, 성공적으로 완료되면 델리게이트 호출을 돌려받게 됨.
+
+Q. 그렇다면 델리게이트로 돌려받은 세션을 어떻게 처리할까?
+- IOnlineSession::OnCreateSessionCompleteDelegates를 이용
+
+
+# 참고
+@ LogOnlineSession: Warning: OSS: No game present to join for session (GameSession)
+ - 다음과 같은 로그가 떴음.
+ - 처음은 세션이 생성되었다는 것을 알 수 있는 문구임.
+ - 이후 LogOnlineSession: Warning: OSS: 
+          Cannot create session 'My Session Game': session already exists.
+   와 같은 로그가 뜨면 이는 세션을 생성하고 파괴하지 않았기 때문에 발생하는 로그임.
+
