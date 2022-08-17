@@ -1,0 +1,25 @@
+58. Query Parameter & Session Settings
+
+# 목표
+- 세션을 찾아내 멀티플레이를 할 수 있도록 해보자
+- SessionSettings를 설정하고 쿼리 파라미터를 설정하여
+  반환되는 쿼리 결과 목록을 반환해보자
+
+# 앞서 [Host] -> [CreateSession]을 하게되면서 SessionSettings을 만들었다.
+- SessionSettings의 쿼리 설정을 조정해야 함.
+- Default 설정에서 좀 더 변화를 줄 것.
+- FOnlineSessionSettings에서 쿼리 설정을 할 수 있다.
+  (예 : 랜매치의 여부, 플레이어의 수, 온라인에서 세션을 보이도록 하는 등)
+
+# FOnlineSessionSearch
+- 세션을 찾아내 멀티플레이를 하려면 찾으려는 세션의 설정에 맞춰 조정해줘야 함.
+- 관련된 정보는 FOnlineSessionSearch에서 찾을 수 있다.
+
+Q. 검색 결과는 어디서 얻을 수 있을까?
+ - FindSessions() 메소드를 이용한 후 
+   클래스 FOnlineSessionSearch 내부에 SearchResults라는 멤버가 있는 것을 볼 수 있다.
+   해당 멤버에서 얻을 수 있음.
+
+# "TArray"
+- 에 대한 개념을 노션에 정리해놓자... ㅋㅋ으아으ㅏ암느아믜나으
+
