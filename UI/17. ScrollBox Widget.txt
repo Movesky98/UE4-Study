@@ -1,5 +1,21 @@
 59. Lists of Widgets with ScrollBox
 
 # 목표
-- 
+- Join 버튼을 눌렀을 때, 서버 리스트가 보여지도록 만들어보자
+- ScrollBox Widget을 이용해보자
 
+# ScrollBox
+- 언리얼엔진에서 UI의 리스트화를 쉽게 가능하도록 해주는 위젯
+- UPanelWidget의 인스턴스로 C++에서 리스트화 하기 위해선 패널위젯의 문서를 보면 됨.
+- ScrollBox 역시 UPanelWidget의 인스턴스이기 때문에, 
+  C++에서 UPanelWidget을 이용하여 변수로 활용될 수 있음
+
+
+# 어떻게 위젯 리스트를 넣을 것인가
+- 이건 상황에 따라, 프로그래머가 선호하는 방향에 따라 달라질 것 같음.
+  강의에선 새로운 UserWidget C++을 생성한 후, WBP를 만들어 리스트화가 될 
+  텍스트를 HorizentalBox에 넣어주었음
+
+# 강의에서 Visual Studio 코드를 잘못 작성시 나타나는 빨간줄을 아래 에러리스트나 출력창에서 보는 것을 볼 수 있었음
+- 이는 Find Symbol Results를 이용한 것임
+- Shift + Alt + F12를 이용하면 되는 듯??
