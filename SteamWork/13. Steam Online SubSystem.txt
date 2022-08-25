@@ -1,0 +1,58 @@
+63. Steam OSS 활성화
+
+# 목표
+- Steam 서브시스템을 활성화 하는 방법에 대해 알아보자
+- 로그에서 스팀에 관한 모든 것을 볼 수 있고
+- 특정 범주에 대해 로깅을 활성화 하는 방법도 알아보자
+- 테스트에 사용되었던 null 서브시스템 -> Steam 서브시스템으로 바꾸기
+
+# 스텝은 다음과 같음
+1. Steam 플러그인 활성화
+2. Steam 모듈 컴파일
+3. 'DefaultEngine.ini'에 Steam 모듈 구성
+
+1. Steam 플러그인 활성화
+- 언리얼 엔진 윈도우에서 [Edit] - [Plugins] - [Online Subsystem Steam 활성화]
+
+2. Steam 모듈 컴파일
+- 프로젝트이름.Build.cs에 있는 PublicDependencyModuleNames.AddRange에
+  "OnlineSubsystemSteam" 추가하고 리빌드
+
+3. 'DefaultEngine.ini'에 Steam 모듈 구성
+ 1) 이거 추가요~
+[/Script/Engine.GameEngine]
++NetDriverDefinitions=(DefName="GameNetDriver",DriverClassName="OnlineSubsystemSteam.SteamNetDriver",DriverClassNameFallback="OnlineSubsystemUtils.IpNetDriver")
+
+[OnlineSubsystem]
+DefaultPlatformService=Steam
+
+[OnlineSubsystemSteam]
+bEnabled=true
+SteamDevAppId=480
+
+[/Script/OnlineSubsystemSteam.SteamNetDriver]
+NetConnectionClassName="OnlineSubsystemSteam.SteamNetConnection"
+
+ + SteamDevAppId -> 480은 기본으로 제공하는 게임인 SpaceWar에서 가져온 것임.
+ + NetDriver란 직접 IP 연결을 만드는 대신, VPN이 필요치 않게 해주어, 
+    필요한 경우 Steam을 통해 연결할 수 있도록 함.
+
+
+# 스팀 OSS로 바꾸게 되면 에디터 내부에선 Steam OSS를 사용할 수 없음
+- 따라서 Powershell 또는 Mac에서 터미널을 열어 사용하거나 명령 프롬포트를 이용해야함.
+- 이건 옛날버전 기준이라네요.
+
+# 명령어
+"C:\Users\user0128\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe" "E:\UE4 Tutorial\Udemy\Puzzle_Platforms\PuzzlePlatforms\PuzzlePlatforms.uproject" -game -log
+@ 파워쉘의 경우, & 붙이고 해야함
+
+
+-------------------------------------------------------------------------------------------
+# Steam이 작동하는 방식에 대한 로그 세부정보
+- 로그를 보면 LogAudio, LogTemp, LogRenderer과 같은 것들이 있음.
+- 로그 수준 (Log Level) : Default, Warning, Error, Verbose, VeryVerbose 등
+
+# 자세한 로깅을 활성화하기 위해선 ~(Tildy 키)를 눌러야 함.
+- Log LogOnline " "
+- " "은 Warning, Verbose 같은 것이 올 수 있다.
+
