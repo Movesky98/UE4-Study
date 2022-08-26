@@ -55,4 +55,7 @@ NetConnectionClassName="OnlineSubsystemSteam.SteamNetConnection"
 # 자세한 로깅을 활성화하기 위해선 ~(Tildy 키)를 눌러야 함.
 - Log LogOnline " "
 - " "은 Warning, Verbose 같은 것이 올 수 있다.
+- 로깅 활성화의 명령어는 Log
+- LogOnline = 로그 카테고리
 
+@ 요약하면 Log "로그 카테고리" "로그 레벨"

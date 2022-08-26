@@ -16,4 +16,11 @@ A. 이를 처리하기 위한 방법 중 하나는 TOptional 타입을 사용하
    GetValue()를 사용하여 옵션 값을 획득할 수 있음.
 - 출처 : https://docs.unrealengine.com/4.27/en-US/API/Runtime/Core/Misc/TOptional/
 
+# TOptional 과 TSharedPtr
+- TOptional은 데이터를 멤버 변수로 저장하고
+  TSharedPtr은 데이터를 다른곳에 저장하여 가리키는 포인터 역할을 한다.
+- 이 둘은 보통 각각 스택과 힙을 의미하지만, 포인터가 스택을 가리킬 수 있기때문에 
+  항상 그런 것은 아님!
+- 또한 TOptional은 힙에 할당될 수 있음
+
 
