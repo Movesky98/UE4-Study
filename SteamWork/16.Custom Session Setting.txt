@@ -1,0 +1,10 @@
+69. Custom Session Settings
+
+# 목표
+- 커스텀 세션을 설정하는 방법, 검색하는 방법을 알아보고
+- 스팀 특정 서버에 대해 이름을 설정하는 방법을 알아보자
+
+# 설정
+- FOnlineSessionSettings::Set() 이용
+- Set()에 들어가는 프로퍼티에 
+  EOnlineDataAdvertisementType으로 광고를 할지 안할지 선택할 수 있음.
