@@ -1,0 +1,60 @@
+86. 서버 함수 및 치트 방지
+
+# 목표
+- 클라이언트의 움직임 정보를 서버까지 전파되도록 하는데 집중할 것임.
+
+# 보통 멀티구조를 파악하지 않고 게임을 만들 경우
+- Unity 엔진에서도 제작했듯이, 서버가 움직이는 모습은 클라이언트에서 볼 수 있었지만
+  클라이언트가 움직이는 모습은 서버에서 보이지 않을 수 있음.
+
+- 이는 서버의 상태는 클라이언트로 전달되지만,
+  클라이언트의 상태는 서버로 전달되지 않음을 의미함.
+
+Q1. 그렇다면 클라이언트에서 상태를 변경하려고 했을 경우는 어떻게 할까
+ - 클라이언트가 할 수 있는 일은 상태를 변경하려고 할 때, 서버에 요청할 수 있다.
+ - 언리얼에서는 이를 위해 RPC(Remote Procedure Call)라는 것을 사용함!
+
+# 언리얼에서 사용하는 RPC들은 크게 3가지가 존재함.
+1. UFUNCTION(Client)
+   void ClientRPCFunction();
+
+2. UFUNCTION(Server)
+   void ServerRPCFunction();
+
+3. UFUNCTION(NetMulticast)
+   void MulticastRPCFunction();
+
+Q2. Client에서 ServerRPCFunction을 사용하게 되면 어떻게 처리될까
+ - 해당 RPC 함수의 본문이 서버에서 실행됨
+ - 클라이언트에서 서버를 변경할 수 있는 유일한 방법
+
+# UPROPERTY(Server, Reliable, WithValidation)
+- 유효성 검사
+
+Q3. 유효성 검사는 왜 필요한가?
+ - 클라이언트가 치트를 쓰지 못하도록 막기 위해
+
+Q4. 왜 클라이언트를 막는가?
+ - 클라이언트를 수정할 수 있기 때문에
+ - 해킹될 수 있기때문에 클라이언트로부터 오는 어떤 것도 신뢰할 수 없음.
+ - 따라서 우리가 서버 RPC로 노출하는 것은 실제로 잠겨있어야 한다.
+ - 실제로 수정할 수 없는 함수들은 괜찮음. 허나 아닌 함수들은 잠겨야 함.
+
+Q5. 그렇다면 어떤 함수들이 유효성 검사가 필요한가? 
+ - SetLocation, SetEnemyHealth, KillEnemy와 같이 
+   클라이언트가 수정할 경우 대참사가 일어나는 부분들을 검사해주는 것이 옳다.
+
+Q6. 그렇다면 이런 함수들의 유효성 검사는 어떻게 하는가?
+ - 간단하다. 헤더파일에서 
+   UFUNCTION(Server, Reliable, WithValidation)
+   void A() 라는 함수를 선언했을 경우,
+
+   C++에서 구현할 때 
+   void ClassName::A_Implementation()과
+   bool ClassName::A_Validate()를 같이 구현해주면 됨.
+
+ - 각각, 서버에서 실행되는 Implementation, 유효성 검사를 하는 Validate로 보면 될 듯.
+ 
+ @ 참고사항
+   - Validate를 사용하는 경우, 유효성 검사를 위해 bool 값을 반환해주어야 한다.
+
