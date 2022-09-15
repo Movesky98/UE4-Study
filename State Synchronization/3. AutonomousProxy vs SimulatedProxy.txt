@@ -1,0 +1,15 @@
+87. AutonomousProxy vs SimulatedProxy
+
+# 목표
+- 자율 프록시가 무엇인지 배워보자
+- 자율 프록시라고 하는 것이 무슨 권한 역할을 수행하는지
+  시뮬레이션된 프록시가 무엇인지 배워보자.
+- 두개의 프록시가 뭐가 다른지 배워보자.
+
+# ActorRole 과 RemoteRole
+- 문서를 보고 정리하도록 하자.
+
+# DrawDebugString
+- 
+
+# Actor Role 에 대한 개념 공부해놓기.
