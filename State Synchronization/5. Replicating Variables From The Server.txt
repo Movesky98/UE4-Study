@@ -1,0 +1,38 @@
+89. 서버에서 변수 복제하기.
+
+# 목표
+- 서버에서 자율 프록시(AutonomousProxy)로 위치 및 회전을 복제하는 방법을 알아보자
+- 회전을 덮어쓰고 적분 및 다른 시간 단계에서 발생하는 오류 원인을 제거할 수 있음.
+- 프로퍼티 복제를 사용해 서버로부터 받은 위치와 회전을 복사하는 방법을 Araboza.
+
+# 프로퍼티에 대한 복제를 설정하기 위해 거쳐야 하는 단계가 존재함.
+ 1. 복제할 프로퍼티를 UPROPERTY()에 추가하고
+
+ 2.  복제하려는 UPROPERTY에 호출된 프로퍼티를 지정하기만 하면 됨.
+    단, 액터의 UPROPERTY이어야 하고 Replicated를 가져야 함.
+    ( 예: 
+          UPROPERTY(replicated)
+          AActor* Owner;
+          
+          AActor::GetLifetimeReplicatedProps(대충변수 들어가는 칸) const
+          {
+	   Super::GetLifeTimeReplicateProps(대충 변수);
+               DOREPLIFETIME(AActor, Owner);
+          }
+    )
+    ! #include "Net/UnrealNetwork.h" 포함해야함.
+
+ 3. 그 액터를 복제함
+    AActor::AActor()
+    {
+         bReplicates = true;
+    }
+
+Q1. cpp 파일에 GetLifeTimeReplicatedProps를 추가했을 때, 헤더파일도 추가해야하는가?
+ - 아님. UPROPERTY(replicated)가 있는 순간 
+   바로 GetLifeTimeReplicatedProps를 찾는다고 함.
+
+
+
+# 참고문서
+https://docs.unrealengine.com/4.26/ko/InteractiveExperiences/Networking/Actors/Properties/
