@@ -1,0 +1,14 @@
+90. 복제시 코드 트리거
+
+# 목표
+- 자율 프록시 (AutonomousProxy)를 더 매끄럽게 만들것임.
+- 자율 프록시가 가지고 있는 불안정한 문제에 대해 이유를 찾아내 해결할 것임.
+
+# 서버로부터 업데이트 알림을 받는 방법
+- UPROPERTY의 ReplicatedUsing이라는 인자가 존재함.
+ 예:
+	UPROPERTY(ReplicatedUsing = OnRep_ReplicatedLocation)
+	FVector ReplicatedLocation;
+	
+	UFUNCTION()
+	void OnRep_ReplicatedLocation();
